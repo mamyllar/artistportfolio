@@ -1,0 +1,10 @@
+<div class="data-form">
+    <form class="form-signin" action="<%=`/galleries/${gallery._id}/update?_method=PUT`%>" method="POST">
+      <h2 class="form-signin-heading">Edit gallery:</h2>
+      <label for="inputTitle">Title</label>
+      <input type="text" name="title" id="inputTitle" class="form-control" value="<%= gallery.title %>" placeholder="Title" autofocus>
+      <label for="inputDescription">Description</label>
+      <input type="text" name="description" id="inputDescription" class="form-control" value="<%= gallery.description %>" placeholder="Description">
+      <br /><button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+    </form>
+  </div>

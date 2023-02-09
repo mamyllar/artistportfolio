@@ -1,0 +1,31 @@
+<h1 class="center">Gallery Data for
+    <%= gallery.title %>
+  </h1>
+  
+  <table class="table">
+    <tr>
+      <th>Title</th>
+      <td>
+        <%= gallery.title %>
+      </td>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <td>
+        <%= gallery.description%>
+      </td>
+    </tr>
+  </table>
+  
+  
+  <div>
+    <a class="button" href="<%=`/gallerys/${gallery._id}/edit`%>">
+      Edit gallery Details
+    </a>
+  </div>
+  <div>
+    <a class="button" href="<%= `/gallerys/${gallery._id}/delete?_method=DELETE` %>" onclick="return confirm('Are you sure you want to delete this record?')" a>Delete</a>
+  </div>
+  <div>
+    <a class="button" href="/gallerys">View all gallerys</a>
+  </div>
