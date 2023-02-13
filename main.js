@@ -50,7 +50,6 @@ app.use(
     saveUninitialized: false
   })
 );
-app.use(connectFlash());
 
 app.use(passport.initialize());
 app.use(passport.session());
