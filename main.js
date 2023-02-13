@@ -15,9 +15,9 @@ const express = require("express"),
 
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb+srv://IirisAdmin:artistportfolio@artistportfolio.dar6xev.mongodb.net/test",
-  { useNewUrlParser: true, useFindAndModify: false }
+  { useNewUrlParser: true/* , useFindAndModify: false */ }
 );
-mongoose.set("useCreateIndex", true);
+//mongoose.set("useCreateIndex", true);
 
 app.set("port", process.env.PORT || 3000);
 app.set("view engine", "ejs");
@@ -31,7 +31,7 @@ app.use(
 app.use(morgan("combined"));
 app.use(layouts);
 app.use(express.static("public"));
-app.use(expressValidator());
+//app.use(expressValidator());
 app.use(
   express.urlencoded({
     extended: false
@@ -54,8 +54,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(Artist.createStrategy());
-passport.serializeArtist(Artist.serializeArtist());
-passport.deserializeArtist(Artist.deserializeArtist());
+passport.serializeUser(Artist.serializeUser());
+passport.deserializeUser(Artist.deserializeUser());
 
 app.use((req, res, next) => {
   res.locals.loggedIn = req.isAuthenticated();

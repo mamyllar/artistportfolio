@@ -132,39 +132,39 @@ module.exports = {
     }
     res.json(errorObject);
   },
-//   filterArtistGalleries: (req, res, next) => {
-//     let currentArtist = res.locals.currentArtist;
-//     if (currentArtist) {
-//       let mappedGalleries = res.locals.galleries.map(gallery => {
-//         let artistJoined = currentArtist.galleries.some(artistGallery => {
-//           return artistGallery.equals(gallery._id);
-//         });
-//         return Object.assign(gallery.toObject(), { joined: artistJoined });
-//       });
-//       res.locals.galleries = mappedGalleries;
-//       next();
-//     } else {
-//       next();
-//     }
-//   },
-//   join: (req, res, next) => {
-//     let galleryId = req.params.id,
-//       currentArtist = req.artist;
-//     if (currentArtist) {
-//       Artist.findByIdAndUpdate(currentArtist, {
-//         $addToSet: {
-//           galleries: galleryId
-//         }
-//       })
-//         .then(() => {
-//           res.locals.success = true;
-//           next();
-//         })
-//         .catch(error => {
-//           next(error);
-//         });
-//     } else {
-//       next(new Error("Artist must log in."));
-//     }
-//   }
+  filterArtistGalleries: (req, res, next) => {
+    let currentArtist = res.locals.currentArtist;
+    if (currentArtist) {
+      let mappedGalleries = res.locals.galleries.map(gallery => {
+        let artistJoined = currentArtist.galleries.some(artistGallery => {
+          return artistGallery.equals(gallery._id);
+        });
+        return Object.assign(gallery.toObject(), { joined: artistJoined });
+      });
+      res.locals.galleries = mappedGalleries;
+      next();
+    } else {
+      next();
+    }
+  },
+  join: (req, res, next) => {
+    let galleryId = req.params.id,
+      currentArtist = req.artist;
+    if (currentArtist) {
+      Artist.findByIdAndUpdate(currentArtist, {
+        $addToSet: {
+          galleries: galleryId
+        }
+      })
+        .then(() => {
+          res.locals.success = true;
+          next();
+        })
+        .catch(error => {
+          next(error);
+        });
+    } else {
+      next(new Error("Artist must log in."));
+    }
+  }
 };
