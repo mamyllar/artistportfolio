@@ -7,7 +7,7 @@ const router = require("express").Router(),
   apiRoutes = require("./apiRoutes");
 
 router.use("/api", apiRoutes);
-router.use("/users", artistRoutes);
+router.use("/artists", artistRoutes);
 router.use("/", homeRoutes);
 router.use("/", errorRoutes);
 
