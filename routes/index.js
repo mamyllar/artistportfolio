@@ -9,7 +9,7 @@ const router = require("express").Router(),
 
 router.use("/api", apiRoutes);
 router.use("/artists", artistRoutes);
-router.use("/gallery", galleryRoutes);
+router.use("/galleries", galleryRoutes);
 router.use("/", homeRoutes);
 router.use("/", errorRoutes);
 
