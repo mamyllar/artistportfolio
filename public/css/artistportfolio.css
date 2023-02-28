@@ -116,6 +116,15 @@ a {
   background: rgba(209, 46, 42, 0.7);
 }
 
+.create {
+  position: absolute;
+  right: 10px;
+  top: 15px;
+  padding: 10px;
+  background: #d7c1ff;
+  border-radius: 20px;
+}
+
 .login {
   position: absolute;
   top: 0;
