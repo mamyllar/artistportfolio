@@ -11,6 +11,7 @@ const express = require("express"),
   cookieParser = require("cookie-parser"),
   expressSession = require("express-session"),
   expressValidator = require("express-validator"),
+  connectFlash = require("connect-flash"),
   Artist = require("./models/artist");
 
 mongoose.connect(
@@ -50,6 +51,7 @@ app.use(
     saveUninitialized: false
   })
 );
+app.use(connectFlash());
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -60,6 +62,7 @@ passport.deserializeUser(Artist.deserializeUser());
 app.use((req, res, next) => {
   res.locals.loggedIn = req.isAuthenticated();
   res.locals.currentArtist = req.Artist;
+  res.locals.flashMessages = req.flash();
   next();
 });
 
