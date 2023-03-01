@@ -142,9 +142,10 @@ module.exports = {
     failureRedirect: "/artists/login",
     successRedirect: "/",
   }),
-  logout: (req, res, next) => {
-    req.logout();
-    res.locals.redirect = "/";
-    next();
+  logout: function(req, res, next) {
+    req.logout(function(err){
+    if (err) {return next(err); }
+    res.redirect("/");
+    });
   }
 };
