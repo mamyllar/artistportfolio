@@ -13,7 +13,6 @@ var gallerySchema = new Schema(
     owner: {
       type: Schema.Types.ObjectId,
       ref: "Artist",
-      required: true,
     },
     description: {
       type: String,
