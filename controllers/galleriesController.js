@@ -7,6 +7,7 @@ const Gallery = require("../models/gallery"),
     return {
       title: body.title,
       description: body.description,
+      owner: body.owner,
     };
   };
 

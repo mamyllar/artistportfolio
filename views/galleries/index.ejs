@@ -7,6 +7,7 @@
     <tr>
       <th>Title</th>
       <th>Description</th>
+      <th>Artist</th>
       <th>Edit</th>
       <th>Delete</th>
     </tr>
@@ -21,6 +22,9 @@
       </td>
       <td>
         <%= gallery.description %>
+      </td>
+      <td>
+        <%= gallery.owner %>
       </td>
       <td>
         <a href="<%=`galleries/${gallery._id}/edit`%>">
