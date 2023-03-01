@@ -2,7 +2,7 @@
 
 const Artist = require("../models/artist"),
   passport = require("passport"),
-  getartistParams = body => {
+  getUserParams = body => {
     return {
       name: {
         first: body.first,
@@ -35,14 +35,12 @@ module.exports = {
 
   create: (req, res, next) => {
     if (req.skip) return next();
-    let newartist = new Artist(getartistParams(req.body));
+    let newartist = new Artist(getUserParams(req.body));
     Artist.register(newartist, req.body.password, (e, artist) => {
       if (artist) {
-        req.flash("success", `${artist.fullName}'s account created successfully!`);
         res.locals.redirect = "/artists";
         next();
       } else {
-        req.flash("error", `Failed to create artist account because: ${e.message}.`);
         res.locals.redirect = "/artists/new";
         next();
       }
@@ -88,7 +86,7 @@ module.exports = {
 
   update: (req, res, next) => {
     let artistId = req.params.id,
-      artistParams = getartistParams(req.body);
+      artistParams = getUserParams(req.body);
 
     Artist.findByIdAndUpdate(artistId, {
       $set: artistParams
@@ -142,13 +140,10 @@ module.exports = {
   },
   authenticate: passport.authenticate("local", {
     failureRedirect: "/artists/login",
-    failureFlash: "Failed to login.",
     successRedirect: "/",
-    successFlash: "Logged in!"
   }),
   logout: (req, res, next) => {
     req.logout();
-    req.flash("success", "You have been logged out!");
     res.locals.redirect = "/";
     next();
   }
