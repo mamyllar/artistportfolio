@@ -180,8 +180,14 @@ button[type="submit"] {
 }
 
 #modal-button {
-  background-color: #ffe7a2;
-  color: #625956;
+  background-color: #7b3bfb;
+  color: #ffffff;
+  border: 1px solid;
+}
+
+#modal-button:hover {
+  background-color: #ba97ff;
+  color: #ffffff;
   border: 1px solid;
 }
 
