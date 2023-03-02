@@ -21,14 +21,16 @@
   </tr>
 </table>
 
+<% if (loggedIn) { %>
 <div class="center">
   <a class="button" href="<%=`/artists/${artist._id}/edit`%>">
     Edit Artist Details
   </a>
 </div>
 <div class="center">
-  <a class="button" href="<%= `/artists/${user._id}/delete?_method=DELETE` %>" onclick="return confirm('Are you sure you want to delete this record?')" a>Delete</a>
+  <a class="button" href="<%= `/artists/${artist._id}/delete?_method=DELETE` %>" onclick="return confirm('Are you sure you want to delete this record?')" a>Delete</a>
 </div>
+<% } %>
 <div class="center">
   <a class="button" href="/artists">View all artists</a>
 </div>

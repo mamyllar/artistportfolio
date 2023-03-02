@@ -18,19 +18,22 @@
 			<h1 id="title">Artist Portfolios</h1>
 		</div>
 		<div class="col-sm nav-align">
-			<a href="/chat" class="chat-icon">@</a>
 			<a href="/">
 				<span class="button">Home</span>
 			</a>
 			<a href="/artists">
 				<span class="button">Artists</span>
 			</a>
+			<a href="/galleries">
+				<span class="button">Galleries</span>
+			</a>
+			<% if (loggedIn) { %>
+				<%- include('galleries/_galleriesModal') %>.
+			<% } %>
 
 		<div class="login">
 			<% if (loggedIn) { %>
-				<p>Logged in as
-				<a href="<%=`/artists/${currentArtist._id}`%>">
-				<%= currentArtist.fullName %></a>
+				<p>Logged in 
 				<span class="log-out">
 					<a href="/artists/logout">Log out</a>
 				</span>
@@ -39,7 +42,21 @@
 				<a href="/artists/login">Log In</a>
 			<% } %>
 		</div>
+		<% if (!loggedIn) { %>
+		<div class="create">
+			<a href="/artists/new">Create User</a>
+		  </div>
+		  <% } %>
 	</div>
+	<div class="flashes">
+		<% if (flashMessages) { %>
+			<% if (flashMessages.success) { %>
+				<div class="flash success"><%= flashMessages.success %></div>
+			<% } else if (flashMessages.error) { %>
+				<div class="flash error"><%= flashMessages.error %></div>
+			<% } %>
+		<% } %>
+		</div>
 
 	<div class="container">
 		<%- body %>

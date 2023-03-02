@@ -1,8 +1,10 @@
 "use strict";
 
+
+
 const Artist = require("../models/artist"),
   passport = require("passport"),
-  getartistParams = body => {
+  getArtistParams = body => {
     return {
       name: {
         first: body.first,
@@ -35,15 +37,16 @@ module.exports = {
 
   create: (req, res, next) => {
     if (req.skip) return next();
-    let newartist = new Artist(getartistParams(req.body));
+    let newartist = new Artist(getArtistParams(req.body));
     Artist.register(newartist, req.body.password, (e, artist) => {
       if (artist) {
-        req.flash("success", `${artist.fullName}'s account created successfully!`);
+        req.flash("success", `Account created successfully!`);
         res.locals.redirect = "/artists";
         next();
       } else {
-        req.flash("error", `Failed to create artist account because: ${e.message}.`);
+        console.log(`Error saving user: ${error.message}`);
         res.locals.redirect = "/artists/new";
+        req.flash("error", `Failed to create user account because: ${error.message}`);
         next();
       }
     });
@@ -88,7 +91,7 @@ module.exports = {
 
   update: (req, res, next) => {
     let artistId = req.params.id,
-      artistParams = getartistParams(req.body);
+      artistParams = getArtistParams(req.body);
 
     Artist.findByIdAndUpdate(artistId, {
       $set: artistParams
@@ -120,15 +123,15 @@ module.exports = {
     res.render("artists/login");
   },
   validate: (req, res, next) => {
-    req
-      .sanitizeBody("email")
+    const { body, validationResult } = require('express-validator');
+/*     body("email")
       .normalizeEmail({
         all_lowercase: true
       })
-      .trim();
-    req.check("email", "Email is invalid").isEmail();
-    req.check("password", "Password cannot be empty").notEmpty();
-    req.getValidationResult().then(error => {
+      .trim(); */
+    body("email").isEmail();
+    body("password").notEmpty();
+/*     getValidationResult().then(error => {
       if (!error.isEmpty()) {
         let messages = error.array().map(e => e.msg);
         req.skip = true;
@@ -137,19 +140,22 @@ module.exports = {
         next();
       } else {
         next();
-      }
-    });
+      } 
+    });*/
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({errors: errors.array() });
+    }
+    next();
   },
   authenticate: passport.authenticate("local", {
     failureRedirect: "/artists/login",
-    failureFlash: "Failed to login.",
     successRedirect: "/",
-    successFlash: "Logged in!"
   }),
-  logout: (req, res, next) => {
-    req.logout();
-    req.flash("success", "You have been logged out!");
-    res.locals.redirect = "/";
-    next();
+  logout: function(req, res, next) {
+    req.logout(function(err){
+    if (err) {return next(err); }
+    res.redirect("/");
+    });
   }
 };

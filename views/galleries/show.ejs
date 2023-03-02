@@ -15,17 +15,24 @@
         <%= gallery.description%>
       </td>
     </tr>
+    <tr>
+      <th>Artist</th>
+      <td>
+        <%= gallery.owner%>
+      </td>
+    </tr>
   </table>
   
-  
+  <% if (gallery.owner && loggedIn || !gallery.owner) { %>
   <div>
-    <a class="button" href="<%=`/gallerys/${gallery._id}/edit`%>">
+    <a class="button" href="<%=`/galleries/${gallery._id}/edit`%>">
       Edit gallery Details
     </a>
   </div>
   <div>
-    <a class="button" href="<%= `/gallerys/${gallery._id}/delete?_method=DELETE` %>" onclick="return confirm('Are you sure you want to delete this record?')" a>Delete</a>
+    <a class="button" href="<%= `/galleries/${gallery._id}/delete?_method=DELETE` %>" onclick="return confirm('Are you sure you want to delete this record?')" a>Delete</a>
   </div>
+  <% } %>
   <div>
-    <a class="button" href="/gallerys">View all gallerys</a>
+    <a class="button" href="/galleries">View all galleries</a>
   </div>
