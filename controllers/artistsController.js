@@ -40,10 +40,13 @@ module.exports = {
     let newartist = new Artist(getArtistParams(req.body));
     Artist.register(newartist, req.body.password, (e, artist) => {
       if (artist) {
+        req.flash("success", `Account created successfully!`);
         res.locals.redirect = "/artists";
         next();
       } else {
+        console.log(`Error saving user: ${error.message}`);
         res.locals.redirect = "/artists/new";
+        req.flash("error", `Failed to create user account because: ${error.message}`);
         next();
       }
     });

@@ -123,6 +123,7 @@ a {
   padding: 10px;
   background: #87f599;
   border-radius: 20px;
+  max-width: 13%;
 }
 
 .create:hover {
@@ -134,6 +135,7 @@ a {
   position: absolute;
   top: 0;
   right: 10px;
+  max-width: 13%;
 }
 
 button[type="submit"] {
@@ -163,7 +165,7 @@ button[type="submit"] {
 }
 
 .log-out {
-  display: inline-block;
+  display: block;
   padding: 0 8px;
   border-radius: 10px;
   background: #fff;

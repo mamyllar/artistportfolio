@@ -40,10 +40,10 @@ app.use(
 );
 app.use(express.json());
 
-app.use(cookieParser("secretCuisine123"));
+app.use(cookieParser("secretPainting123"));
 app.use(
   expressSession({
-    secret: "secretCuisine123",
+    secret: "secretPainting123",
     cookie: {
       maxAge: 4000000
     },

@@ -33,16 +33,16 @@ module.exports = {
 
   create: (req, res, next) => {
     let galleryParams = getGalleryParams(req.body);
-    let newGallery = {galleryParams};
-    console.log(newGallery);
-    Gallery.create(newGallery)
+    Gallery.create(galleryParams)
       .then(gallery => {
-        res.locals.redirect = "/galleries/join";
+        req.flash("success", `Gallery ${gallery.title} created successfully!`)
+        res.locals.redirect = "/galleries";
         res.locals.gallery = gallery;
         next();
       })
       .catch(error => {
         console.log(`Error saving gallery: ${error.message}`);
+        req.flash("error", `Failed to create gallery because: ${error.message}`);
         next(error);
       });
   },
