@@ -145,6 +145,15 @@ button[type="submit"] {
   right: 10px;
   top: 5px;
   padding: 10px;
+  background: #c19dfb;
+  border-radius: 20px;
+}
+
+.login:hover {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  padding: 10px;
   background: #d9c1ff;
   border-radius: 20px;
 }
