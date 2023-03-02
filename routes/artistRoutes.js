@@ -7,7 +7,7 @@ router.get("/", artistsController.index, artistsController.indexView);
 router.get("/new", artistsController.new);
 router.post(
   "/create",
-  //artistsController.validate,
+  artistsController.validate,
   artistsController.create,
   artistsController.redirectView
 );

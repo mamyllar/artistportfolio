@@ -27,12 +27,12 @@
 			<a href="/galleries">
 				<span class="button">Galleries</span>
 			</a>
+			<%- include('galleries/_galleriesModal') %>.
 
 		<div class="login">
 			<% if (loggedIn) { %>
 				<p>Logged in as
-				<a href="<%=`/artists/${currentUser._id}`%>">
-				<%= currentUser.fullName %></a>
+				<%= currentUser %>
 				<span class="log-out">
 					<a href="/artists/logout">Log out</a>
 				</span>

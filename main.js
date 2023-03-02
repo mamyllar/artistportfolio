@@ -61,7 +61,7 @@ passport.deserializeUser(Artist.deserializeUser());
 
 app.use((req, res, next) => {
   res.locals.loggedIn = req.isAuthenticated();
-  res.locals.currentArtist = req.Artist;
+  res.locals.currentUser = req.Artist;
   res.locals.flashMessages = req.flash();
   next();
 });

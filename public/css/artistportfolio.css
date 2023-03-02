@@ -188,7 +188,7 @@ button[type="submit"] {
   font-weight: 100;
 }
 
-.course-title {
+.gallery-title {
   font-family: "Baloo Bhaina";
   padding: 0 5px;
   font-size: 20px;
@@ -198,14 +198,21 @@ button[type="submit"] {
   float: left;
 }
 
-.course-description {
+.gallery-owner {
   padding: 10px 10px 20px 10px;
   text-align: left;
   margin: 0 10px;
   clear: left;
 }
 
-.course-title::before {
+.gallery-description {
+  padding: 10px 10px 20px 10px;
+  text-align: left;
+  margin: 0 10px;
+  clear: left;
+}
+
+.gallery-title::before {
   background-image: url("../images/icon.png");
   background-size: 20px 40px;
   display: inline-block;
@@ -214,14 +221,7 @@ button[type="submit"] {
   content: "";
 }
 
-.course-cost {
-  display: inline-block;
-  position: absolute;
-  right: 35px;
-  margin-top: 60px;
-  font-family: "Baloo Bhaina";
-  font-size: 18px;
-}
+
 
 .modal-body {
   padding: 15px 30px;
@@ -251,23 +251,3 @@ button[type="submit"] {
   overflow: scroll;
 }
 
-#chat li {
-  text-decoration: none;
-  list-style: none;
-  padding: 10px;
-}
-
-.message.current-user {
-  font-weight: bold;
-  color: #3d41b4;
-}
-
-.chat-icon {
-  position: absolute;
-  left: 20px;
-  font-size: 25px;
-  top: 0px;
-  width: 25px;
-  color: #fff;
-  background: #ee3114;
-}

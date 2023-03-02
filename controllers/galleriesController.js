@@ -2,11 +2,12 @@
 
 const Gallery = require("../models/gallery"),
   httpStatus = require("http-status-codes"),
-//  Artist = require("../models/artist"),
+  Artist = require("../models/artist"),
   getGalleryParams = body => {
     return {
       title: body.title,
       description: body.description,
+      owner: body.owner
     };
   };
 
@@ -32,9 +33,11 @@ module.exports = {
 
   create: (req, res, next) => {
     let galleryParams = getGalleryParams(req.body);
-    Gallery.create(galleryParams)
+    let newGallery = {galleryParams};
+    console.log(newGallery);
+    Gallery.create(newGallery)
       .then(gallery => {
-        res.locals.redirect = "/galleries";
+        res.locals.redirect = "/galleries/join";
         res.locals.gallery = gallery;
         next();
       })
@@ -149,14 +152,21 @@ module.exports = {
   },
   join: (req, res, next) => {
     let galleryId = req.params.id,
-      currentArtist = req.artist;
+      currentArtist = req.user;
+      console.log(galleryId);
+      console.log(currentArtist);
     if (currentArtist) {
       Artist.findByIdAndUpdate(currentArtist, {
         $addToSet: {
-          galleries: galleryId
+          gallery: galleryId
+        }
+      });
+      Gallery.findByIdAndUpdate(galleryId, {
+        $set: {
+          owner: currentArtist
         }
       })
-        .then(() => {
+      .then(() => {
           res.locals.success = true;
           next();
         })

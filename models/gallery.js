@@ -24,4 +24,5 @@ var gallerySchema = new Schema(
   }
 );
 
+
 module.exports = mongoose.model("Gallery", gallerySchema);
